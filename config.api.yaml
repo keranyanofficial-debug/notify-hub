@@ -1,0 +1,45 @@
+notifiers:
+  slack: true
+  discord: true
+
+watch:
+  interval_sec: 300   # 5分おき（--watch のときに使う）
+
+targets:
+  # A: 補助金（Jグランツ）
+  - id: jgrants_it
+    kind: jgrants
+    title: "Jグランツ（補助金）: IT/業務効率"
+    keywords: ["IT導入", "DX", "業務効率", "設備投資"]
+    acceptance: "1"            # 募集中だけ
+    sort: "acceptance_end_datetime"
+    order: "ASC"
+    max_items: 10
+
+  # B: 脆弱性（JVN iPedia 新着）
+  - id: jvndb_new
+    kind: rss
+    title: "JVN iPedia 新着"
+    url: "https://jvndb.jvn.jp/ja/rss/jvndb_new.rdf"
+    max_items: 15
+
+  # B: 脆弱性（JVN 新着/更新）
+  - id: jvn_updates
+    kind: rss
+    title: "JVN 新着/更新"
+    url: "http://jvn.jp/rss/jvn.rdf"
+    max_items: 20
+
+  # A: 官公庁の動向（デジタル庁 RSS）
+  - id: digital_agency_news
+    kind: rss
+    title: "デジタル庁 新着・更新"
+    url: "https://www.digital.go.jp/rss/news.xml"
+    max_items: 20
+
+  # C: 法令改正（e-Gov 更新法令一覧）
+  - id: egov_law_updates
+    kind: egov_law_updates
+    title: "e-Gov 更新法令（本日分）"
+    max_items: 20
+    important_keywords: ["個人情報", "労働", "雇用", "下請", "会社", "建設", "税", "電子帳簿", "インボイス"]
